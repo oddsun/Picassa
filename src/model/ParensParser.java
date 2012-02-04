@@ -43,6 +43,9 @@ public class ParensParser extends Parser {
 		myFactoryObject.add(ATanExpression.getFactory());
 		myFactoryObject.add(RGBtoYCbCrExpression.getFactory());
 		myFactoryObject.add(YCbCrtoRGBExpression.getFactory());
+		myFactoryObject.add(PerlinColorExpression.getFactory());
+		myFactoryObject.add(PerlinBWExpression.getFactory());
+		myFactoryObject.add(LetExpression.getFactory());
 	}
 	
 	@Override
@@ -54,13 +57,21 @@ public class ParensParser extends Parser {
 		data.myCurrentPosition = expMatcher.end();
 		ArrayList<Expression> myOperands = new ArrayList<Expression>();
 		skipWhiteSpace(data);
+		int count = 0;
+//		boolean oldLet = data.isLet;
 		while(currentCharacter(data) != ')')
 		{
+			if (commandName.equals("let"))
+				data.isLet = count != 1? true: false;
+//			if (count == 1) data.isLet = false; //need to make sure second operand does not contain first operand, but can contain variable from earlier lets
+//			System.out.println(data.isLet);
 			if (data.myCurrentPosition == data.myInput.length() - 1)
 				throw new ParserException("Expected close paren!");
-			myOperands.add(ParserMediator.parseParser(data));	
+			myOperands.add(ParserMediator.parseParser(data));
 			skipWhiteSpace(data);
+			count++;
 		}
+		if(commandName.equals("let")) data.isLet = false;
 		data.myCurrentPosition++;
 			// System.out.println(commandName);
 		for(ExpressionFactory factory : myFactoryObject)

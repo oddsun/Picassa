@@ -1,6 +1,6 @@
 package model.expressions;
 
-import model.RGBColor;
+import model.*;
 
 /**
  * An Expression represents a mathematical expression as a tree.
@@ -16,7 +16,7 @@ public abstract class Expression {
 	public Expression() {
 	}
 
-	public abstract RGBColor evaluate(double x, double y);
+	public abstract RGBColor evaluate(VariableData variables);
 
 	public abstract String toString();
 }

@@ -25,13 +25,13 @@ public abstract class Parser {
 	 */
 	public abstract Expression parseExpression(ParserData data);
 
-	protected static void skipWhiteSpace(ParserData data) {
+	public static void skipWhiteSpace(ParserData data) {
 		while (notAtEndOfString(data) && Character.isWhitespace(currentCharacter(data))) {
 			data.myCurrentPosition++;
 		}
 	}
 
-	protected static char currentCharacter(ParserData data) {
+	public static char currentCharacter(ParserData data) {
 		return data.myInput.charAt(data.myCurrentPosition);
 	}
 

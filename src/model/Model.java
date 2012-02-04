@@ -1,8 +1,10 @@
 package model;
 
+
 import java.awt.Dimension;
 
 import model.expressions.Expression;
+import model.expressions.VariableData;
 
 
 
@@ -19,6 +21,7 @@ public class Model
 
     /**
      * Evaluate an expression for each point in the image.
+     * @param parameterObject TODO
      */
     public Pixmap evaluate (String input, Dimension size)
     {
@@ -26,14 +29,16 @@ public class Model
         // create expression to evaluate just once
         Expression toEval = ParserMediator.makeExpression(input);
         // evaluate at each pixel
+        
+        VariableData var = new VariableData(0,0);
         for (int imageY = 0; imageY < size.height; imageY++)
         {
-            double evalY = imageToDomainScale(imageY, size.height);
+            var.y = imageToDomainScale(imageY, size.height);
             for (int imageX = 0; imageX < size.width; imageX++)
             {
-                double evalX = imageToDomainScale(imageX, size.width);
+                var.x = imageToDomainScale(imageX, size.width);
                 result.setColor(imageX, imageY,
-                                toEval.evaluate(evalX,evalY).toJavaColor());
+                                toEval.evaluate(var).toJavaColor());
             }
         }
         return result;

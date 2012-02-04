@@ -9,7 +9,7 @@ import model.util.PerlinNoise;
 public class PerlinBWExpression extends CmdExpression {
 
 	public PerlinBWExpression(ArrayList<Expression> operands) {
-		super("perlinColor", operands);
+		super("perlinBW", operands);
 		// TODO Auto-generated constructor stub
 	}
 

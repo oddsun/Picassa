@@ -5,6 +5,7 @@ import model.Parser;
 import model.ParserException;
 import model.ParserMediator;
 import model.RGBColor;
+import model.expressions.VariableData;
 import static org.junit.Assert.*;
 import org.junit.*;
 
@@ -30,17 +31,17 @@ public class ParserTest
     @Test
     public void testConstant ()
     {
-        RGBColor actual = ParserMediator.makeExpression("1").evaluate(0,0);
+        RGBColor actual = ParserMediator.makeExpression("1").evaluate(new VariableData(0, 0));
         assertTrue(WHITE.equals(actual));
-        actual = ParserMediator.makeExpression("-1").evaluate(0,0);
+        actual = ParserMediator.makeExpression("-1").evaluate(new VariableData(0, 0));
         assertTrue(BLACK.equals(actual));
-        actual = ParserMediator.makeExpression("0.5").evaluate(0,0);
+        actual = ParserMediator.makeExpression("0.5").evaluate(new VariableData(0, 0));
         assertTrue(GRAY.equals(actual));
-        actual = ParserMediator.makeExpression(".5").evaluate(0,0);
+        actual = ParserMediator.makeExpression(".5").evaluate(new VariableData(0, 0));
         assertTrue(GRAY.equals(actual));
         try
         {
-            ParserMediator.makeExpression("0.5 0.5").evaluate(0,0);
+            ParserMediator.makeExpression("0.5 0.5").evaluate(new VariableData(0, 0));
             fail("Exception should have been thrown");
         }
         catch (ParserException e)
@@ -55,17 +56,17 @@ public class ParserTest
     @Test
     public void testBinaryOps ()
     {
-        RGBColor actual = ParserMediator.makeExpression("(plus .1 .9)").evaluate(0,0);
+        RGBColor actual = ParserMediator.makeExpression("(plus .1 .9)").evaluate(new VariableData(0, 0));
         assertTrue(WHITE.equals(actual));
-        actual = ParserMediator.makeExpression("(plus (plus 0.01 0.09) (plus 0.4 0.5))").evaluate(0,0);
+        actual = ParserMediator.makeExpression("(plus (plus 0.01 0.09) (plus 0.4 0.5))").evaluate(new VariableData(0, 0));
         assertTrue(WHITE.equals(actual));
-        actual = ParserMediator.makeExpression("    (plus(plus 0.01 0.09)(plus 0.4 0.5   ))    ").evaluate(0,0);
+        actual = ParserMediator.makeExpression("    (plus(plus 0.01 0.09)(plus 0.4 0.5   ))    ").evaluate(new VariableData(0, 0));
         assertTrue(WHITE.equals(actual));
-        actual = ParserMediator.makeExpression("(minus (div 1.8 2) (mul -10 0.01))").evaluate(0,0);
+        actual = ParserMediator.makeExpression("(minus (div 1.8 2) (mul -10 0.01))").evaluate(new VariableData(0, 0));
         assertTrue(WHITE.equals(actual));
         try
         {
-            ParserMediator.makeExpression("(fooo 0.1 0.9)").evaluate(0,0);
+            ParserMediator.makeExpression("(fooo 0.1 0.9)").evaluate(new VariableData(0, 0));
             fail("Exception should have been thrown");
         }
         catch (ParserException e)

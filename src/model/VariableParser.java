@@ -8,7 +8,7 @@ import model.expressions.*;
 
 public class VariableParser extends Parser {
 
-	private static final Pattern VAR_REGEX = Pattern.compile("[xy]");
+	private static final Pattern VAR_REGEX = Pattern.compile("[a-zA-Z]+");
 	
 	private ArrayList<VarExpression> myVars;
 	
@@ -20,6 +20,7 @@ public class VariableParser extends Parser {
 		myVars = new ArrayList<VarExpression>();
 		myVars.add(new XVarExpression());
 		myVars.add(new YVarExpression());
+//		myVars.add(new GeneralVarExpression(""));
 	}
 
 	@Override
@@ -28,11 +29,14 @@ public class VariableParser extends Parser {
 			xyMatcher.find(data.myCurrentPosition);
 			String varMatcher = data.myInput.substring(xyMatcher.start(), xyMatcher.end());
 			data.myCurrentPosition = xyMatcher.end();
+//			System.out.println(data.isLet);
+			if(data.isLet) return new GeneralVarExpression(varMatcher);
 			for(VarExpression var : myVars)
 			{
 				if(var.isThisVar(varMatcher))
 					return var;
 			}
+//			System.out.println(data.myCurrentPosition);
 			throw new ParserException("Unknown Variable "
 					+ varMatcher);
 		}

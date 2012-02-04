@@ -11,7 +11,7 @@ public class NumberExpression extends Expression {
 	}
 
 	@Override
-	public RGBColor evaluate(double x, double y) {
+	public RGBColor evaluate(VariableData variables) {
 		return myValue;
 	}
 

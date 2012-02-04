@@ -30,12 +30,12 @@ public abstract class CmdExpression extends Expression {
 	}
 	
 	@Override
-	public RGBColor evaluate(double x, double y)
+	public RGBColor evaluate(VariableData variables)
 	{
 		ArrayList<RGBColor> myOperandColors = new ArrayList<RGBColor>();
 		for(Expression Operand : myOperands)
 		{
-			myOperandColors.add(Operand.evaluate(x, y));
+			myOperandColors.add(Operand.evaluate(variables));
 		}
 		return calculate(myOperandColors);
 	}
@@ -53,6 +53,7 @@ public abstract class CmdExpression extends Expression {
 		result.append(")");
 		return result.toString();
 	}
+	
 
 	public abstract CmdExpression create(ArrayList<Expression> operands);
 }

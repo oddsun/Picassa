@@ -4,7 +4,12 @@ import model.RGBColor;
 
 public abstract class VarExpression extends Expression {
 
-	public VarExpression(){}
+	protected String myVarName;
+	
+	public VarExpression(String name)
+	{
+		myVarName = name;
+	}
 	
 //	private boolean isX, isY;
 
@@ -18,16 +23,19 @@ public abstract class VarExpression extends Expression {
 //		isY = xyMatch.equals("y");
 //	}
 
-	public boolean varMatching(String varMatcher, String var)
+	public boolean varMatching(String varMatcher)
 	{
-		return varMatcher.equals(var);
+		return varMatcher.equals(myVarName);
 	}
 	
 	public abstract boolean isThisVar(String varMatcher);
+
 	
 	@Override
-	public abstract RGBColor evaluate(double x, double y);
+	public abstract RGBColor evaluate(VariableData variables);
 
 	@Override
-	public abstract String toString();
+	public String toString(){
+		return " " + myVarName;
+	}
 }

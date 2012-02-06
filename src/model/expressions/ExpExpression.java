@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-public class ExpExpression extends TwoOperandSymmetricCmdExpression {
+public class ExpExpression extends TwoPlusOperandSymmetricCmdExpression {
 	
 	public ExpExpression(ArrayList<Expression> operands) {
 		super(operands, "exp", "^");
@@ -15,7 +15,8 @@ public class ExpExpression extends TwoOperandSymmetricCmdExpression {
 		return Math.pow(a, b);
 	}
 
-	public static ExpressionFactory getFactory() {
-		return new ExpressionFactory(new ExpExpression(null));
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new ExpExpression(operands);
 	}
 }

@@ -13,10 +13,10 @@ public class AbsExpression extends OneOperandSymmetricCmdExpression {
 	public double symmetricCalculate(double a) {
 		return Math.abs(a);
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new AbsExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new AbsExpression(operands);
 	}
 
 }

@@ -14,7 +14,8 @@ public class NegExpression extends OneOperandSymmetricCmdExpression {
 		return -a;
 	}
 
-	public static ExpressionFactory getFactory() {
-		return new ExpressionFactory(new NegExpression(null));
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new NegExpression(operands);
 	}
 }

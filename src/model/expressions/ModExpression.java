@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-public class ModExpression extends TwoOperandSymmetricCmdExpression {
+public class ModExpression extends TwoPlusOperandSymmetricCmdExpression {
 	
 	public ModExpression(ArrayList<Expression> operands) {
 		super(operands, "mod", "%");
@@ -15,8 +15,9 @@ public class ModExpression extends TwoOperandSymmetricCmdExpression {
 		return a % b;
 	}
 
-	public static ExpressionFactory getFactory() {
-		return new ExpressionFactory(new ModExpression(null));
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new ModExpression(operands);
 	}
 	
 }

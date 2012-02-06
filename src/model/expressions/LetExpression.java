@@ -25,27 +25,20 @@ public class LetExpression extends ParensExpression {
 			if (s.equals(varName))
 				throw new ParserException("Too bad, I, " + varName + ", am already taken!!");
 		variableMap.put(varName, myOperands.get(1).evaluate(variableMap));
-//		System.out.println(variables.myVarMap);
 		RGBColor r = myOperands.get(2).evaluate(variableMap);
 		variableMap.remove(myOperands.get(0));
 		return r;
 	}
-	
-//	public void buildMap()
-//	{
-//		varMap = new HashMap<VarExpression, Expression>();
-//		varMap.put((VarExpression) myOperands.get(0), myOperands.get(1));
-//	}
 	
 	@Override
 	public RGBColor calculate(ArrayList<RGBColor> operandColors) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new LetExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new LetExpression(operands);
 	}
 
 }

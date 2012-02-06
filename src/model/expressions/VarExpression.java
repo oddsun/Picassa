@@ -22,12 +22,7 @@ public class VarExpression extends Expression {
 		xyMatcher.find(data.myCurrentPosition);
 		String varMatcher = data.myInput.substring(xyMatcher.start(), xyMatcher.end());
 		data.myCurrentPosition = xyMatcher.end();
-		setMyVarName(varMatcher);
-		return this;
-	}
-	
-	private void setMyVarName(String varMatcher) {
-		myVarName = varMatcher;
+		return new VarExpression(varMatcher);
 	}
 
 	@Override
@@ -38,11 +33,6 @@ public class VarExpression extends Expression {
 	public RGBColor evaluate(Map<String, RGBColor> variables)
 	{
 		return variables.get(getMyVarName());
-	}
-
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new VarExpression(""));
 	}
 	
 	@Override

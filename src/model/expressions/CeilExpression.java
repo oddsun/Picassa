@@ -13,10 +13,10 @@ public class CeilExpression extends OneOperandSymmetricCmdExpression {
 	public double symmetricCalculate(double a) {
 		return Math.ceil(a);
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new CeilExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new CeilExpression(operands);
 	}
 
 }

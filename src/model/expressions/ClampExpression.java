@@ -18,10 +18,10 @@ public class ClampExpression extends OneOperandSymmetricCmdExpression {
 			return -1;
 		return a;
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new ClampExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new ClampExpression(operands);
 	}
 
 }

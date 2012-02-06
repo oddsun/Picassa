@@ -19,10 +19,10 @@ public class RGBtoYCbCrExpression extends ParensExpression{
 		RGBColor color = operandColors.get(0);
 		return color.rbgToYCbCr();
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new RGBtoYCbCrExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new RGBtoYCbCrExpression(operands);
 	}
 
 }

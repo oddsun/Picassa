@@ -22,7 +22,8 @@ public class ColorExpression extends ParensExpression {
 		return new RGBColor(left.getRed(), middle.getGreen(), right.getBlue());
 	}
 
-	public static ExpressionFactory getFactory() {
-		return new ExpressionFactory(new ColorExpression(null));
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new ColorExpression(operands);
 	}
 }

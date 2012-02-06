@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.ParserException;
-import model.ParserMediator;
+import model.ParserData;
 import model.RGBColor;
 import static org.junit.Assert.*;
 import org.junit.*;
@@ -32,19 +32,23 @@ public class ParserTest
     @Test
     public void testConstant ()
     {
-    	ParserMediator med = new ParserMediator();
+    	ParserData data = new ParserData("1");
     	Map<String, RGBColor> myMap = new HashMap<String, RGBColor>();
-        RGBColor actual = med.makeExpression("1").evaluate(myMap);
+        RGBColor actual = data.makeExpression().evaluate(myMap);
         assertTrue(WHITE.equals(actual));
-        actual = med.makeExpression("-1").evaluate(myMap);
+    	data = new ParserData("-1");
+        actual = data.makeExpression().evaluate(myMap);
         assertTrue(BLACK.equals(actual));
-        actual = med.makeExpression("0.5").evaluate(myMap);
+    	data = new ParserData("0.5");
+        actual = data.makeExpression().evaluate(myMap);
         assertTrue(GRAY.equals(actual));
-        actual = med.makeExpression(".5").evaluate(myMap);
+    	data = new ParserData(".5");
+        actual = data.makeExpression().evaluate(myMap);
         assertTrue(GRAY.equals(actual));
         try
         {
-            med.makeExpression("0.5 0.5").evaluate(myMap);
+        	data = new ParserData("0.5 0.5");
+        	data.makeExpression().evaluate(myMap);
             fail("Exception should have been thrown");
         }
         catch (ParserException e)
@@ -59,19 +63,23 @@ public class ParserTest
     @Test
     public void testBinaryOps ()
     {
-    	ParserMediator med = new ParserMediator();
+    	ParserData data = new ParserData("(plus .1 .9)");
     	Map<String, RGBColor> myMap = new HashMap<String, RGBColor>();
-        RGBColor actual = med.makeExpression("(plus .1 .9)").evaluate(myMap);
+        RGBColor actual = data.makeExpression().evaluate(myMap);
         assertTrue(WHITE.equals(actual));
-        actual = med.makeExpression("(plus (plus 0.01 0.09) (plus 0.4 0.5))").evaluate(myMap);
+    	data = new ParserData("(plus (plus 0.01 0.09) (plus 0.4 0.5))");
+        actual = data.makeExpression().evaluate(myMap);
         assertTrue(WHITE.equals(actual));
-        actual = med.makeExpression("    (plus(plus 0.01 0.09)(plus 0.4 0.5   ))    ").evaluate(myMap);
+    	data = new ParserData("    (plus(plus 0.01 0.09)(plus 0.4 0.5   ))    ");
+        actual = data.makeExpression().evaluate(myMap);
         assertTrue(WHITE.equals(actual));
-        actual = med.makeExpression("(minus (div 1.8 2) (mul -10 0.01))").evaluate(myMap);
+    	data = new ParserData("(minus (div 1.8 2) (mul -10 0.01))");
+        actual = data.makeExpression().evaluate(myMap);
         assertTrue(WHITE.equals(actual));
         try
         {
-            med.makeExpression("(fooo 0.1 0.9)").evaluate(myMap);
+        	data = new ParserData("(fooo 0.1 0.9)");
+        	data.makeExpression().evaluate(myMap);
             fail("Exception should have been thrown");
         }
         catch (ParserException e)

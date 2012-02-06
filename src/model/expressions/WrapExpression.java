@@ -18,10 +18,10 @@ public class WrapExpression extends OneOperandSymmetricCmdExpression {
 			return symmetricCalculate(2 + a);
 		return a;
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new WrapExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new WrapExpression(operands);
 	}
 
 }

@@ -241,6 +241,11 @@ public class RGBColor implements Comparable<RGBColor>, Iterable<Double>
         double range = COLOR_MAX - COLOR_MIN;
         return (int)((value - COLOR_MIN) / range * JAVA_COLOR_MAX);
     }
+    
+    public double average()
+    {
+    	return (myRed + myGreen + myBlue)/ 3.0;
+    }
 
 
 	public RGBColor yCbCrtoRGB() {

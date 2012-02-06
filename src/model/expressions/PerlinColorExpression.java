@@ -21,10 +21,10 @@ public class PerlinColorExpression extends ParensExpression {
 		RGBColor right = operandColors.get(1);
 		return PerlinNoise.colorNoise(left, right);
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new PerlinColorExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new PerlinColorExpression(operands);
 	}
 
 }

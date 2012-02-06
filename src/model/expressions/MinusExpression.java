@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-public class MinusExpression extends TwoOperandSymmetricCmdExpression {
+public class MinusExpression extends TwoPlusOperandSymmetricCmdExpression {
 	
 	public MinusExpression(ArrayList<Expression> operands) {
 		super(operands, "minus", "-");
@@ -15,7 +15,8 @@ public class MinusExpression extends TwoOperandSymmetricCmdExpression {
 		return a - b;
 	}
 
-	public static ExpressionFactory getFactory() {
-		return new ExpressionFactory(new MinusExpression(null));
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new MinusExpression(operands);
 	}
 }

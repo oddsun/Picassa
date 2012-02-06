@@ -48,8 +48,9 @@ public class Model
     public Pixmap evaluate (String input, Dimension size)
     {
         Pixmap result = new Pixmap(size);
+        ParserData data = new ParserData(input);
         // create expression to evaluate just once
-        Expression toEval = new ParserMediator().makeExpression(input);
+        Expression toEval = data.makeExpression();
         // evaluate at each pixel
         
         Map<String, RGBColor> myMap = new HashMap<String, RGBColor>();

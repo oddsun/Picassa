@@ -39,15 +39,7 @@ public class NumberExpression extends Expression {
 		String numberMatch = data.myInput.substring(doubleMatcher.start(),
 				doubleMatcher.end());
 		data.myCurrentPosition = doubleMatcher.end();
-		// this represents the color gray of the given intensity
 		double value = Double.parseDouble(numberMatch);
-//		RGBColor gray = new RGBColor(value);
-		myValue = new RGBColor(value);
-		return this;
-	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new NumberExpression(0));
+		return new NumberExpression(value);
 	}
 }

@@ -14,10 +14,10 @@ public class CosExpression extends OneOperandSymmetricCmdExpression {
 	public double symmetricCalculate(double a) {
 		return Math.cos(a);
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new CosExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new CosExpression(operands);
 	}
 
 }

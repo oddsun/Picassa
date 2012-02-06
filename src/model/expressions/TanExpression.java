@@ -15,9 +15,9 @@ public class TanExpression extends OneOperandSymmetricCmdExpression {
 		return Math.tan(a);
 	}
 
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new TanExpression(null));
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new TanExpression(operands);
 	}
 
 }

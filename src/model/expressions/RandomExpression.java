@@ -24,10 +24,10 @@ public class RandomExpression extends ParensExpression {
 	{
 		return r * 2 - 1;
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new RandomExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new RandomExpression(operands);
 	}
 
 }

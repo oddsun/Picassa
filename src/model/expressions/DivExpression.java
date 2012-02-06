@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-public class DivExpression extends TwoOperandSymmetricCmdExpression {
+public class DivExpression extends TwoPlusOperandSymmetricCmdExpression {
 	
 	public DivExpression(ArrayList<Expression> operands) {
 		super(operands, "div", "/");
@@ -15,7 +15,8 @@ public class DivExpression extends TwoOperandSymmetricCmdExpression {
 		return a / b;
 	}
 
-	public static ExpressionFactory getFactory() {
-		return new ExpressionFactory(new DivExpression(null));
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new DivExpression(operands);
 	}
 }

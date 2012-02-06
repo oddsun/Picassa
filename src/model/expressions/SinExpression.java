@@ -14,10 +14,10 @@ public class SinExpression extends OneOperandSymmetricCmdExpression {
 	public double symmetricCalculate(double a) {
 		return Math.sin(a);
 	}
-	
-	public static ExpressionFactory getFactory()
-	{
-		return new ExpressionFactory(new SinExpression(null));
+
+	@Override
+	public ParensExpression create(ArrayList<Expression> operands) {
+		return new SinExpression(operands);
 	}
 
 }

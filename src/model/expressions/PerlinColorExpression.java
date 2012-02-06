@@ -3,13 +3,12 @@ package model.expressions;
 import java.util.ArrayList;
 
 import model.RGBColor;
-import model.factory.ExpressionFactory;
 import model.util.PerlinNoise;
 
-public class PerlinColorExpression extends CmdExpression {
+public class PerlinColorExpression extends ParensExpression {
 
 	public PerlinColorExpression(ArrayList<Expression> operands) {
-		super("perlinColor", operands);
+		super(operands, "perlinColor");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -21,11 +20,6 @@ public class PerlinColorExpression extends CmdExpression {
 		RGBColor left = operandColors.get(0);
 		RGBColor right = operandColors.get(1);
 		return PerlinNoise.colorNoise(left, right);
-	}
-
-	@Override
-	public CmdExpression create(ArrayList<Expression> operands) {
-		return new PerlinColorExpression(operands);
 	}
 	
 	public static ExpressionFactory getFactory()

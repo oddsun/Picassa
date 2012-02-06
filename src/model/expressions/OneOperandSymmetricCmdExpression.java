@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 import model.RGBColor;
 
-public abstract class OneOperandSymmetricCmdExpression extends CmdExpression {
+public abstract class OneOperandSymmetricCmdExpression extends ParensExpression {
 
 	protected final static int DEFAULT_NUM_OPERANDS = 1;
 	
-	public OneOperandSymmetricCmdExpression(String cmd,
-			ArrayList<Expression> operands) {
-		super(cmd, operands);
+	public OneOperandSymmetricCmdExpression(ArrayList<Expression> operands, String ... cmd) {
+		super(operands, cmd);
 	}
 
 	@Override

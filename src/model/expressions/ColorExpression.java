@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 
 import model.RGBColor;
-import model.factory.ExpressionFactory;
 
-public class ColorExpression extends CmdExpression {
+public class ColorExpression extends ParensExpression {
 
 	public final static int DEFAULT_NUM_OPERANDS = 3;
 	
 	public ColorExpression(ArrayList<Expression> operands) {
-		super("color", operands);
+		super(operands, "color");
 	}
 
 	@Override
@@ -21,11 +20,6 @@ public class ColorExpression extends CmdExpression {
 		RGBColor middle = operandColors.get(1);
 		RGBColor right = operandColors.get(2);
 		return new RGBColor(left.getRed(), middle.getGreen(), right.getBlue());
-	}
-
-	@Override
-	public CmdExpression create(ArrayList<Expression> operands) {
-		return new ColorExpression(operands);
 	}
 
 	public static ExpressionFactory getFactory() {

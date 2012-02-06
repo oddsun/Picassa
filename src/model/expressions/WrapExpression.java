@@ -2,12 +2,11 @@ package model.expressions;
 
 import java.util.ArrayList;
 
-import model.factory.ExpressionFactory;
 
 public class WrapExpression extends OneOperandSymmetricCmdExpression {
 
 	public WrapExpression(ArrayList<Expression> operands) {
-		super("wrap", operands);
+		super(operands, "wrap");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -18,11 +17,6 @@ public class WrapExpression extends OneOperandSymmetricCmdExpression {
 		if(a < -1)
 			return symmetricCalculate(2 + a);
 		return a;
-	}
-
-	@Override
-	public CmdExpression create(ArrayList<Expression> operands) {
-		return new WrapExpression(operands);
 	}
 	
 	public static ExpressionFactory getFactory()

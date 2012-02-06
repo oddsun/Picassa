@@ -2,12 +2,11 @@ package model.expressions;
 
 import java.util.ArrayList;
 
-import model.factory.ExpressionFactory;
 
 public class ClampExpression extends OneOperandSymmetricCmdExpression {
 
 	public ClampExpression(ArrayList<Expression> operands) {
-		super("clamp", operands);
+		super(operands, "clamp");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -18,11 +17,6 @@ public class ClampExpression extends OneOperandSymmetricCmdExpression {
 		if(a < -1)
 			return -1;
 		return a;
-	}
-
-	@Override
-	public CmdExpression create(ArrayList<Expression> operands) {
-		return new ClampExpression(operands);
 	}
 	
 	public static ExpressionFactory getFactory()

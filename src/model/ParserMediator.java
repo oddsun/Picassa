@@ -2,35 +2,61 @@ package model;
 
 import java.util.ArrayList;
 
-import model.expressions.Expression;
+import model.expressions.*;
 
 public class ParserMediator {
 	
-	private static ArrayList<Parser> myParsers;
+	private ArrayList<ExpressionFactory> myFactoryObject;
 	
-	static
-	{
-		myParsers = new ArrayList<Parser>();
-		myParsers.add(new NumberParser());
-		myParsers.add(new VariableParser());
-		myParsers.add(new ParensParser());
+	public void initialize() {
+		myFactoryObject = new ArrayList<ExpressionFactory>();
+		myFactoryObject.add(NumberExpression.getFactory());
+		myFactoryObject.add(VarExpression.getFactory());
+		myFactoryObject.add(ColorExpression.getFactory());
+		myFactoryObject.add(DivExpression.getFactory());
+		myFactoryObject.add(ExpExpression.getFactory());
+		myFactoryObject.add(MinusExpression.getFactory());
+		myFactoryObject.add(ModExpression.getFactory());
+		myFactoryObject.add(MulExpression.getFactory());
+		myFactoryObject.add(NegExpression.getFactory());
+		myFactoryObject.add(PlusExpression.getFactory());
+		myFactoryObject.add(RandomExpression.getFactory());
+		myFactoryObject.add(FloorExpression.getFactory());
+		myFactoryObject.add(CeilExpression.getFactory());
+		myFactoryObject.add(AbsExpression.getFactory());
+		myFactoryObject.add(ClampExpression.getFactory());
+		myFactoryObject.add(WrapExpression.getFactory());
+		myFactoryObject.add(SinExpression.getFactory());
+		myFactoryObject.add(CosExpression.getFactory());
+		myFactoryObject.add(TanExpression.getFactory());
+		myFactoryObject.add(ATanExpression.getFactory());
+		myFactoryObject.add(RGBtoYCbCrExpression.getFactory());
+		myFactoryObject.add(YCbCrtoRGBExpression.getFactory());
+		myFactoryObject.add(PerlinColorExpression.getFactory());
+		myFactoryObject.add(PerlinBWExpression.getFactory());
+		myFactoryObject.add(LetExpression.getFactory());
 	}
 	
-	public static Expression parseParser(ParserData data)
+	public Expression parseParser(ParserData data)
 	{
-		for(Parser parser : myParsers)
+		initialize();
+		for(ExpressionFactory factory: myFactoryObject)
 		{
-			if(parser.isThisParser(data))
-				return parser.parseExpression(data);
+			if(factory.isThisExpression(data))
+				return factory.parseAndCreateExpression(data);
 		}
-		throw new ParserException("Unknown Parser!");
+		data.skipWhiteSpace();
+		int pos = data.myInput.indexOf(" ", data.myCurrentPosition);
+		String commandName = pos == -1 ? "" : data.myInput.substring(data.myCurrentPosition, pos);
+		throw new ParserException("Unknown Command "
+		+ commandName, ParserException.Type.UNKNOWN_COMMAND);
 	}
 	
-	public static Expression makeExpression(String input) {
+	public Expression makeExpression(String input) {
 		ParserData data = new ParserData (input, 0);
 		Expression result = parseParser(data);
-		Parser.skipWhiteSpace(data);
-		if (Parser.notAtEndOfString(data)) {
+		data.skipWhiteSpace();
+		if (data.notAtEndOfString()) {
 			throw new ParserException(
 					"Unexpected characters at end of the string: "
 							+ data.myInput.substring(data.myCurrentPosition),

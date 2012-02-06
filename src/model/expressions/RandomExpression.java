@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.RGBColor;
-import model.factory.ExpressionFactory;
 
-public class RandomExpression extends CmdExpression {
+public class RandomExpression extends ParensExpression {
 
 	
 	
 	public RandomExpression(ArrayList<Expression> operands) {
-		super("random", operands);
+		super(operands, "random");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,11 +23,6 @@ public class RandomExpression extends CmdExpression {
 	private double resize(double r)
 	{
 		return r * 2 - 1;
-	}
-
-	@Override
-	public CmdExpression create(ArrayList<Expression> operands) {
-		return new RandomExpression(operands);
 	}
 	
 	public static ExpressionFactory getFactory()

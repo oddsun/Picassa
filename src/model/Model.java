@@ -2,9 +2,10 @@ package model;
 
 
 import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Map;
 
 import model.expressions.Expression;
-import model.expressions.VariableData;
 
 
 
@@ -17,6 +18,27 @@ public class Model
 {
     public static final double DOMAIN_MIN = -1;
     public static final double DOMAIN_MAX = 1;
+    public static final int NUM_FRAMES = 50;
+
+    private double myCurrentTime = 0;
+
+
+    /**
+     * Advance to the next frame in the animation.
+     */
+    public void reset ()
+    {
+        myCurrentTime = 0;
+    }
+
+
+    /**
+     * Advance to the next frame in the animation.
+     */
+    public void nextFrame ()
+    {
+        myCurrentTime += 1.0 / NUM_FRAMES;
+    }
 
 
     /**
@@ -27,18 +49,18 @@ public class Model
     {
         Pixmap result = new Pixmap(size);
         // create expression to evaluate just once
-        Expression toEval = ParserMediator.makeExpression(input);
+        Expression toEval = new ParserMediator().makeExpression(input);
         // evaluate at each pixel
         
-        VariableData var = new VariableData(0,0);
+        Map<String, RGBColor> myMap = new HashMap<String, RGBColor>();
+        myMap.put("t", new RGBColor(myCurrentTime*2 - 1));
         for (int imageY = 0; imageY < size.height; imageY++)
         {
-            var.y = imageToDomainScale(imageY, size.height);
+            myMap.put("y", new RGBColor(imageToDomainScale(imageY, size.height)));
             for (int imageX = 0; imageX < size.width; imageX++)
             {
-                var.x = imageToDomainScale(imageX, size.width);
-                result.setColor(imageX, imageY,
-                                toEval.evaluate(var).toJavaColor());
+                myMap.put("x", new RGBColor(imageToDomainScale(imageX, size.width)));
+                result.setColor(imageX, imageY, toEval.evaluate(myMap).toJavaColor());
             }
         }
         return result;

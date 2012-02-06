@@ -3,20 +3,14 @@ package model.expressions;
 import java.util.ArrayList;
 
 import model.RGBColor;
-import model.factory.ExpressionFactory;
 
-public class RGBtoYCbCrExpression extends CmdExpression{
+public class RGBtoYCbCrExpression extends ParensExpression{
 
 	private final static int DEFAULT_NUM_OPERANDS = 1;
 	
 	public RGBtoYCbCrExpression(ArrayList<Expression> operands) {
-		super("rgbToYCrCb", operands);
+		super(operands, "rgbToYCrCb");
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public CmdExpression create(ArrayList<Expression> operands) {
-		return new RGBtoYCbCrExpression(operands);
 	}
 
 	@Override

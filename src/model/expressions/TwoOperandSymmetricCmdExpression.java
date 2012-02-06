@@ -2,15 +2,14 @@ package model.expressions;
 
 import java.util.ArrayList;
 
-import model.ParserException;
 import model.RGBColor;
 
-public abstract class TwoOperandSymmetricCmdExpression extends CmdExpression {
+public abstract class TwoOperandSymmetricCmdExpression extends ParensExpression {
 
 	protected final static int DEFAULT_NUM_OPERANDS = 2;
 	
-	public TwoOperandSymmetricCmdExpression(String cmd, ArrayList<Expression> operands) {
-		super(cmd, operands);
+	public TwoOperandSymmetricCmdExpression(ArrayList<Expression> operands, String ... cmd) {
+		super(operands, cmd);
 	}
 
 	@Override

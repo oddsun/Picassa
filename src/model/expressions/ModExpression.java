@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-public class ModExpression extends TwoPlusOperandSymmetricCmdExpression {
+public class ModExpression extends TwoOperandSymmetricCmdExpression {
 	
 	public ModExpression(ArrayList<Expression> operands) {
 		super(operands, "mod", "%");

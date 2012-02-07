@@ -15,7 +15,7 @@ public class ProductExpression extends TwoOperandSymmetricCmdExpression {
 	public RGBColor calculate(ArrayList<RGBColor> operandColors) {
 //		if(DEFAULT_NUM_OPERANDS > operandColors.size())
 //			check(DEFAULT_NUM_OPERANDS, operandColors.size()); //may need to check operandColors size instead
-		double red = 0, green = 0, blue = 0;
+		double red = 1, green = 1, blue = 1;
 		for(RGBColor color : operandColors)
 		{
 			red *= color.getRed();

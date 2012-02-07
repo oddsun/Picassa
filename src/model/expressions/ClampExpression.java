@@ -2,6 +2,8 @@ package model.expressions;
 
 import java.util.ArrayList;
 
+import model.RGBColor;
+
 
 public class ClampExpression extends OneOperandSymmetricCmdExpression {
 
@@ -12,11 +14,7 @@ public class ClampExpression extends OneOperandSymmetricCmdExpression {
 
 	@Override
 	public double symmetricCalculate(double a) {
-		if(a > 1)
-			return 1;
-		if(a < -1)
-			return -1;
-		return a;
+		return new RGBColor().clamp(a);
 	}
 
 	@Override

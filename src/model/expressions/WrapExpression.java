@@ -2,6 +2,8 @@ package model.expressions;
 
 import java.util.ArrayList;
 
+import model.RGBColor;
+
 
 public class WrapExpression extends OneOperandSymmetricCmdExpression {
 
@@ -12,11 +14,7 @@ public class WrapExpression extends OneOperandSymmetricCmdExpression {
 
 	@Override
 	public double symmetricCalculate(double a) {
-		if(a > 1)
-			return symmetricCalculate(-2 + a);
-		if(a < -1)
-			return symmetricCalculate(2 + a);
-		return a;
+		return new RGBColor().wrap(a);
 	}
 
 	@Override

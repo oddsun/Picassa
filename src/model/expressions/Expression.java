@@ -1,5 +1,6 @@
 package model.expressions;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import model.*;
@@ -22,7 +23,7 @@ public abstract class Expression {
 	
 	public abstract Expression parseExpression(ParserData data);
 	
-	public abstract RGBColor evaluate(Map<String, RGBColor> variables);
+	public abstract RGBColor evaluate(Map<String, ArrayList<RGBColor>> variables);
 
 	public abstract String toString();
 }

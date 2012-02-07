@@ -2,36 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import model.expressions.ATanExpression;
-import model.expressions.AbsExpression;
-import model.expressions.AverageExpression;
-import model.expressions.CeilExpression;
-import model.expressions.ClampExpression;
-import model.expressions.ColorExpression;
-import model.expressions.CosExpression;
-import model.expressions.DivExpression;
-import model.expressions.ExpExpression;
-import model.expressions.Expression;
-import model.expressions.FloorExpression;
-import model.expressions.IfExpression;
-import model.expressions.LetExpression;
-import model.expressions.MaxExpression;
-import model.expressions.MinExpression;
-import model.expressions.MinusExpression;
-import model.expressions.ModExpression;
-import model.expressions.MulExpression;
-import model.expressions.NegExpression;
-import model.expressions.NumberExpression;
-import model.expressions.PerlinBWExpression;
-import model.expressions.PerlinColorExpression;
-import model.expressions.PlusExpression;
-import model.expressions.RGBtoYCbCrExpression;
-import model.expressions.RandomExpression;
-import model.expressions.SinExpression;
-import model.expressions.TanExpression;
-import model.expressions.VarExpression;
-import model.expressions.WrapExpression;
-import model.expressions.YCbCrtoRGBExpression;
+import model.expressions.*;
 
 public class ParserData {
 	public int myCurrentPosition;
@@ -75,6 +46,8 @@ public class ParserData {
 		myFactoryObject.add(new AverageExpression(null));
 		myFactoryObject.add(new MinExpression(null));
 		myFactoryObject.add(new MaxExpression(null));
+		myFactoryObject.add(new SumExpression(null));
+		myFactoryObject.add(new ProductExpression(null));
 	}
 	
 	public void skipWhiteSpace() {

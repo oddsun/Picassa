@@ -2,6 +2,7 @@ package model;
 
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,14 +54,22 @@ public class Model
         Expression toEval = data.makeExpression();
         // evaluate at each pixel
         
-        Map<String, RGBColor> myMap = new HashMap<String, RGBColor>();
-        myMap.put("t", new RGBColor(myCurrentTime*2 - 1));
+        Map<String, ArrayList<RGBColor>> myMap = new HashMap<String, ArrayList<RGBColor>>();
+        ArrayList<RGBColor> t = new ArrayList<RGBColor>();
+        t.add(new RGBColor(myCurrentTime*2 - 1));
+        ArrayList<RGBColor> x = new ArrayList<RGBColor>();
+        x.add(new RGBColor(0));
+        ArrayList<RGBColor> y = new ArrayList<RGBColor>();
+        y.add(new RGBColor(0));
+        myMap.put("t", t);
+        myMap.put("y", y);
+        myMap.put("x", x);
         for (int imageY = 0; imageY < size.height; imageY++)
         {
-            myMap.put("y", new RGBColor(imageToDomainScale(imageY, size.height)));
+            y.set(0, new RGBColor(imageToDomainScale(imageY, size.height)));
             for (int imageX = 0; imageX < size.width; imageX++)
             {
-                myMap.put("x", new RGBColor(imageToDomainScale(imageX, size.width)));
+                x.set(0 , new RGBColor(imageToDomainScale(imageX, size.width)));
                 result.setColor(imageX, imageY, toEval.evaluate(myMap).toJavaColor());
             }
         }

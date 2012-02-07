@@ -1,5 +1,6 @@
 package model.expressions;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,9 +31,10 @@ public class VarExpression extends Expression {
 		return VarExpression.VAR_REGEX.matcher(data.myInput.substring(data.myCurrentPosition)).lookingAt();
 	}
 
-	public RGBColor evaluate(Map<String, RGBColor> variables)
+	public RGBColor evaluate(Map<String, ArrayList<RGBColor>> variables)
 	{
-		return variables.get(getMyVarName());
+		ArrayList<RGBColor> colors = variables.get(getMyVarName());
+		return colors.get(colors.size()-1);
 	}
 	
 	@Override

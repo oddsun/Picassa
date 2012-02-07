@@ -63,7 +63,7 @@ public abstract class ParensExpression extends Expression {
 	}
 	
 	@Override
-	public RGBColor evaluate(Map<String, ArrayList<RGBColor>> variables)
+	public RGBColor evaluate(Map<String, RGBColor> variables)
 	{
 		ArrayList<RGBColor> myOperandColors = new ArrayList<RGBColor>();
 		for(Expression Operand : myOperands)

@@ -1,7 +1,6 @@
 package tests;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public class ParserTest
     public void testConstant ()
     {
     	ParserData data = new ParserData("1");
-    	Map<String, ArrayList<RGBColor>> myMap = new HashMap<String, ArrayList<RGBColor>>();
+    	Map<String, RGBColor> myMap = new HashMap<String, RGBColor>();
         RGBColor actual = data.makeExpression().evaluate(myMap);
         assertTrue(WHITE.equals(actual));
     	data = new ParserData("-1");
@@ -65,7 +64,7 @@ public class ParserTest
     public void testBinaryOps ()
     {
     	ParserData data = new ParserData("(plus .1 .9)");
-    	Map<String, ArrayList<RGBColor>> myMap = new HashMap<String, ArrayList<RGBColor>>();
+    	Map<String, RGBColor> myMap = new HashMap<String, RGBColor>();
         RGBColor actual = data.makeExpression().evaluate(myMap);
         assertTrue(WHITE.equals(actual));
     	data = new ParserData("(plus (plus 0.01 0.09) (plus 0.4 0.5))");

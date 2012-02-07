@@ -1,6 +1,5 @@
 package model.expressions;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +18,7 @@ public class NumberExpression extends Expression {
 	}
 
 	@Override
-	public RGBColor evaluate(Map<String, ArrayList<RGBColor>> variables) {
+	public RGBColor evaluate(Map<String, RGBColor> variables) {
 		return myValue;
 	}
 

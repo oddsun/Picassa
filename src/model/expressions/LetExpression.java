@@ -3,12 +3,13 @@ package model.expressions;
 import java.util.ArrayList;
 import java.util.Map;
 
+import model.ParserException;
 import model.RGBColor;
 
 public class LetExpression extends ParensExpression {
 	
 	private static final int DEFAULT_NUM_OPERANDS = 3;
-//	private static final String[] FORBIDDEN_NAMES = {"x", "y", "t"};
+	private static final String[] FORBIDDEN_NAMES = {"x", "y", "t"};
 //	private Map<VarExpression, Expression> varMap;
 
 	public LetExpression(ArrayList<Expression> operands) {
@@ -16,21 +17,19 @@ public class LetExpression extends ParensExpression {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RGBColor evaluate(Map<String, ArrayList<RGBColor>> variableMap)
+	public RGBColor evaluate(Map<String, RGBColor> variableMap)
 	{
 		check(DEFAULT_NUM_OPERANDS, myOperands.size());
 		String varName = ((VarExpression) myOperands.get(0)).getMyVarName();
-		if(!variableMap.containsKey(varName))
-		{
-			variableMap.put(varName, new ArrayList<RGBColor>());
-		}
-		ArrayList<RGBColor> values = variableMap.get(varName);
-//		for(String s : FORBIDDEN_NAMES)
-//			if (s.equals(varName))
-//				throw new ParserException("Too bad, I, " + varName + ", am already taken!!");
-		values.add(myOperands.get(1).evaluate(variableMap));
+		RGBColor oldValue = variableMap.get(varName);
+		for(String s : FORBIDDEN_NAMES)
+			if (s.equals(varName))
+				throw new ParserException("Too bad, I, " + varName + ", am already taken!!");
 		RGBColor r = myOperands.get(2).evaluate(variableMap);
-		values.remove(values.size()-1);
+		if(oldValue == null)
+			variableMap.remove(varName);
+		else	
+			variableMap.put(varName, oldValue);
 		return r;
 	}
 	
